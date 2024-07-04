@@ -15,6 +15,9 @@ for HOSTNAME in `grep -E "fw" /etc/xymon/hosts.cfg | awk '{print $2}'`; do
 		TEMPERATUREF=$(echo "scale=1; $TEMPERATURE2*1.8+32" | bc)
 		echo "&green\t$SENSOR\t$TEMPERATURE2\t$TEMPERATUREF" >> /tmp/$HOSTNAME.temp
 	done
+ 	if [ "$SENSOR" = "" ]; then
+  		continue
+    	fi
 	$BB $BBDISP "status $HOSTNAME.temperature green `date`
 `cat /tmp/$HOSTNAME.temp`
 "
