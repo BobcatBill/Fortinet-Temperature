@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 SNMPSTRING=public
 #BB=/usr/lib/xymon/server/bin/xymon
 #BBDISP=127.0.0.1
