@@ -8,6 +8,7 @@ for HOSTNAME in `grep -E "fw" /etc/xymon/hosts.cfg | awk '{print $2}'`; do
  	echo "STATUS = $STATUS"
  	if [ "$STATUS" = "clear" ]; then
 		echo "Clear Status on $HOSTNAME"
+  		$BB $BBDISP "status $HOSTNAME.temperature clear"
     		continue
     	fi
 	echo "\tSensor Name\t\tCelsius\tFahrenheit" > /tmp/$HOSTNAME.temp
