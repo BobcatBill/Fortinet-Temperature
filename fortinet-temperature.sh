@@ -30,7 +30,7 @@ for HOSTNAME in `grep -E "sw0" /etc/xymon/hosts.cfg | awk '{print $2}'`; do
   		$BB $BBDISP "status $HOSTNAME.temperature clear"
     		continue
     	fi
-	echo "\tSensor Name\t\tCelsius\tFahrenheit" > /tmp/$HOSTNAME.temp
+	echo "\tSensor Name\tCelsius\tFahrenheit" > /tmp/$HOSTNAME.temp
 	for TARGET in $(snmpwalk -Oq -v2c -c $SNMPSTRING $HOSTNAME 1.3.6.1.2.1.99.1 2>/dev/null | grep -i Celsius | awk '{print $1}' ); do
 		SENSOR=$(snmpget -Oqv -v2c -c $SNMPSTRING $HOSTNAME $TARGET | sed 's/"//g' | sed 's/ /_/g')
 		TARGET2=$(echo $TARGET | sed 's/.99.1.1.1.6./.99.1.1.1.4./g')
