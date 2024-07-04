@@ -4,7 +4,7 @@ SNMPSTRING=public
 for HOSTNAME in `grep -E "fw" /etc/xymon/hosts.cfg | awk '{print $2}'`; do
 	echo "\tSensor Name\t\tCelsius\tFahrenheit" > /tmp/$HOSTNAME.temp
 	for TARGET in $(snmpwalk -Oq -v2c -c $SNMPSTRING $HOSTNAME 1.3.6.1.4.1.12356.101.4.3 2>/dev/null | grep -i tempera | awk '{print $1}' ); do
- 		if [[ "$?" != 0 ]]; then
+ 		if [ "$?" != 0 ]; then
 			continue
    		fi
  		echo "TARGET = $TARGET"
