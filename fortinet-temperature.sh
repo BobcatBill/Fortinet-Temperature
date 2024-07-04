@@ -1,13 +1,11 @@
 #!/bin/sh
 SNMPSTRING=public
-BB=/usr/lib/xymon/server/bin/xymon
-BBDISP=127.0.0.1
+#BB=/usr/lib/xymon/server/bin/xymon
+#BBDISP=127.0.0.1
 
 for HOSTNAME in `grep -E "fw" /etc/xymon/hosts.cfg | awk '{print $2}'`; do
 	STATUS=$($BB $BBDISP "query $HOSTNAME.conn" | awk '{print $1}')
- 	echo "STATUS = $STATUS"
  	if [ "$STATUS" = "clear" ]; then
-		echo "Clear Status on $HOSTNAME"
   		$BB $BBDISP "status $HOSTNAME.temperature clear"
     		continue
     	fi
