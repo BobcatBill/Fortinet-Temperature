@@ -1,5 +1,7 @@
 #!/bin/sh
 SNMPSTRING=public
+BB=/usr/lib/xymon/server/bin/xymon
+BBDISP=127.0.0.1
 
 for HOSTNAME in `grep -E "fw" /etc/xymon/hosts.cfg | awk '{print $2}'`; do
 	STATUS=$($BB $BBDISP "query $HOSTNAME.conn" | awk '{print $1}')
