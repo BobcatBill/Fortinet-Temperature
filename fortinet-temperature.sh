@@ -7,7 +7,7 @@ for HOSTNAME in `grep -E "fw" /etc/xymon/hosts.cfg | awk '{print $2}'`; do
  		if [ "$?" != 0 ]; then
 			continue
    		fi
- 		echo "TARGET = $TARGET"
+ 		echo "TARGET = '$TARGET'"
    		TARGET=$(echo "$TARGET" | grep -i tempera | awk '{print $1}' )
 		SENSOR=$(snmpget -Oqv -v2c -c $SNMPSTRING $HOSTNAME $TARGET | sed 's/"//g' | sed 's/ /_/g')
 		TARGET2=$(echo $TARGET | sed 's/.101.4.3.2.1.2./.101.4.3.2.1.3./g')
