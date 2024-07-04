@@ -38,7 +38,7 @@ for HOSTNAME in `grep -E "sw0" /etc/xymon/hosts.cfg | awk '{print $2}'`; do
 		TEMPERATURE=$(snmpget -Oqv -v2c -c $SNMPSTRING $HOSTNAME $TARGET2 | sed 's/"//g')
 		TEMPERATURE2=$(echo "scale=1; $TEMPERATURE/1" | bc)
 		TEMPERATUREF=$(echo "scale=1; $TEMPERATURE2*1.8+32" | bc)
-		$((COUNTER+1))
+		(( COUNTER++ ))
 		echo "&green\tCPU$COUNTER\t\t$TEMPERATURE2\t$TEMPERATUREF" >> /tmp/$HOSTNAME.temp
 	done
 	$BB $BBDISP "status $HOSTNAME.temperature green `date`
